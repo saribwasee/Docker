@@ -46,6 +46,7 @@ We can use multiple containers with a single image
 Creating my own image
 We need a dockerfile in linux 
 
+```bash
 FROM Ubuntu								[Base ubuntu layer]
 RUN apt-get update							[changes in apt packages]
 RUN apt-get install python						
@@ -53,8 +54,11 @@ RUN pip install flask							[changes in pip packages]
 RUN pip install flask-mysql						[changes in pip packages]
 COPY . /opt source-code						[Copy code from our host machine]
 ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run		[update the entry point with flask command]
+```
 
+```bash
 Docker build dockerfile -t name/mycustom-app
+```
 
 
 
@@ -90,7 +94,9 @@ Docker run -v data-volume:/var/lib/mysql (image-name) 		[if we run direct this c
 
 
 Docker compose 
-“version: '3'
+
+```bash
+version: '3'
 services:
   # my-app:
     # image: ${docker-registry}/my-app:1.0
@@ -119,6 +125,7 @@ services:
 volumes:
   mongo-data:
     driver: local
-”
+```
+
 If we need a multiple container for a specific application so we can made yaml file to start all containers together
 
