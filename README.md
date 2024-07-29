@@ -1,26 +1,40 @@
 # Docker
 
-A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings. LXC old version of container concept new and extended versions is docker which create a virtual environment.
+A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries, and settings. LXC is an old version of the container concept; the new and extended version is Docker, which creates a virtual environment.
 
+## Docker Engine Versions
 
-- Docker engine of different version of yaml file
-1.	Version 1: create a single bridge network where all containers can be reachable
-2.	Version 2: Create a separate bridge network where all containers in the yaml file can be reachable not all containers
-So, we not need to links containers
-3.	Version 3:  All capabilities of Version 2 and much more
+1. **Version 1**: Creates a single bridge network where all containers can reach each other.
+2. **Version 2**: Creates a separate bridge network where all containers in the YAML file can reach each other, but not all containers. Linking containers is not necessary.
+3. **Version 3**: Includes all capabilities of Version 2 and much more.
 
-The engine consists of three major components:
-1.	Docker Daemon: The daemon (dockerd) is a process that keeps running in the background and waits for commands from the client. The daemon is capable of managing various Docker objects.
-2.	Docker Client: The client  (docker) is a command-line interface program mostly responsible for transporting commands issued by users.
-3.	REST API: The REST API acts as a bridge between the daemon and the client. Any command issued using the client passes through the API to finally reach the daemon.
+## Docker Engine Components
 
-Docker engine have embedded DNS we can resolve by container name, we can change container IP settings by their Dockerfile if image build so we cant changes in image file we again set up new docker file to make any changes.
+1. **Docker Daemon**: 
+   - The daemon (`dockerd`) is a process that keeps running in the background and waits for commands from the client. It manages various Docker objects.
 
-Simple FAQs Questions
-Image (Build an application or OS) [package, template]
-Container (Any App or OS which are running in container)
-We can use multiple containers with a single image
-Linux containers can be run in windows but windows containers can’t run on linux
+2. **Docker Client**: 
+   - The client (`docker`) is a command-line interface program responsible for transporting commands issued by users.
+
+3. **REST API**: 
+   - The REST API acts as a bridge between the daemon and the client. Any command issued using the client passes through the API to reach the daemon.
+
+Docker engine has an embedded DNS, allowing resolution by container name. You can change container IP settings via their Dockerfile. If an image is built, changes cannot be made to the image file; instead, a new Dockerfile must be set up to make changes.
+
+## Simple FAQs
+
+1. **Image**: 
+   - Build an application or OS (package, template).
+
+2. **Container**: 
+   - Any app or OS running in a container.
+
+3. **Multiple Containers**: 
+   - You can use multiple containers with a single image.
+
+4. **Cross-Platform Compatibility**: 
+   - Linux containers can run on Windows, but Windows containers can’t run on Linux.
+
 
 
 ```bash
