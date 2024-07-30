@@ -1,5 +1,7 @@
-FROM node:2.1
+# Stage 1
+FROM node:21 AS backend-builder
 
+# Setup Work dir
 WORKDIR /app
 
 #code copy
@@ -7,6 +9,15 @@ COPY . .
 
 #Install dependencies
 RUN npm -i
+
+# Stage 2
+FROM node:21-slim
+
+# Setup Work dir
+WORKDIR /app
+
+# Copy the above stage as compressed 
+COPY from=backend-builder /app .
 
 # Port
 EXPOSE 5000
