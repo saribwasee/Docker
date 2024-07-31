@@ -1,0 +1,29 @@
+# Stage 1 
+FROM node:21 AS builder
+
+# Setup Working directory
+WORKDIR /app
+
+# Code copy from host to build container
+COPY . .
+
+#Install dependencies for the application
+RUN npm -i
+
+# Stage 2
+FROM node:21-slim
+
+# Setup Working directory
+WORKDIR /app
+
+# Copy the above stage as compressed 
+COPY from=builder /app .
+
+# Port
+EXPOSE 5000
+
+# App start
+CMD ["npm" , "start"]
+
+
+
