@@ -28,9 +28,6 @@ COPY . .
 # Install dependencies required for the application
 RUN npm install
 
-# Build the application (e.g., if you're using a framework like React, Vue, or Angular)
-# RUN npm run build
-
 # Stage 2: Production stage
 # Use a smaller, more lightweight Node.js image for running the application
 FROM node:21-slim
