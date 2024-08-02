@@ -28,7 +28,7 @@ services:
     volumes:
       - mongo-data:/data/db
 
-  # Define the service for Mongo Express (a web-based MongoDB admin interface)
+  # Define the service for Mongo Express (web-based MongoDB admin interface)
   mongo-express:
     # Use the official Mongo Express image from Docker Hub
     image: mongo-express
