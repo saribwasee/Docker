@@ -1,6 +1,6 @@
 ### Docker Compose Concepts
 
-Docker Compose allows you to define and manage multi-container applications in a single YAML file. This simplifies the complex task of orchestrating and coordinating various services, making it easier to manage and replicate your application environment. If we need a multiple container for a specific application so we can made yaml file to start all containers together
+Docker Compose allows you to define and manage multi-container applications in a single YAML file. This simplifies the complex task of orchestrating and coordinating various services, making it easier to manage and replicate your application environment. If we need a multiple container for a specific application so we can made yaml file to start all containers together, docker-compose need separate installation.
 
 #### Key Concepts:
 
@@ -16,7 +16,7 @@ Docker Compose allows you to define and manage multi-container applications in a
 
 #### Example `docker-compose.yaml`:
 
-Here's an example `docker-compose.yml` file for a simple web application with a web server and a database service:
+Here's an small example `docker-compose.yaml` file for simple web application with a web server and a database service:
 
 ```yaml
 version: '3.8'
@@ -69,8 +69,7 @@ volumes:
   - This command stops and removes containers, networks, volumes, and images created by `up`.
 - **Viewing Logs**: `docker-compose logs`
   - Displays log output from services.
-- **Running a One-Off Command**: `docker-compose run`
-  - Run a one-off command against a service (e.g., `docker-compose run web bash`).
+
 
 #### Use Cases:
 
@@ -83,38 +82,24 @@ Docker Compose simplifies the process of managing multi-container applications, 
 
 
 
+- We can build an image from Dockerfile by using docker-compose. 
 
-## Docker Compose Sample
 
-```bash
-version: '3'
+```yaml
+version: '3.8'
+
 services:
-  # my-app:
-    # image: ${docker-registry}/my-app:1.0
-    # ports:
-     # - 3000:3000
-  mongodb:
-    image: mongo
+  backend:
+    container_name: backend
+    build: ./backend                      (Here we define path where Dockerfile availble)
     ports:
-     - 27017:27017
-    environment:
-     - MONGO_INITDB_ROOT_USERNAME=admin
-     - MONGO_INITDB_ROOT_PASSWORD=password
-    volumes:
-     - mongo-data:/data/db
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-     - 8080:8081
-    environment:
-     - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-     - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-     - ME_CONFIG_MONGODB_SERVER=mongodb
+      - "5000:5000"
     depends_on:
-     - "mongodb"
-volumes:
-  mongo-data:
-    driver: local
-```
+      - frontend
 
+  frontend:
+    container_name: frontend
+    build: ./frontend                      (Here we define path where Dockerfile availble)
+    ports:
+      - "8080:8080"
+```
