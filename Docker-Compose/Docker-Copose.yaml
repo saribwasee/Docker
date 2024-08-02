@@ -1,29 +1,57 @@
+# Specify the version of the Docker Compose file format
 version: '3'
+
+# Define the services that make up the application
 services:
-   my-app:
-     image: ${docker-registry}/my-app:1.0
-     ports:
+  # Define the service for the application
+  my-app:
+    # Use the image from the Docker registry specified by the environment variable
+    image: ${docker-registry}/my-app:1.0
+    # Map port 3000 on the host to port 3000 in the container
+    ports:
       - 3000:3000
+
+  # Define the service for MongoDB
   mongodb:
+    # Use the official MongoDB image from Docker Hub
     image: mongo
+    # Map port 27017 on the host to port 27017 in the container
     ports:
-     - 27017:27017
+      - 27017:27017
+    # Set environment variables for MongoDB
     environment:
-     - MONGO_INITDB_ROOT_USERNAME=admin
-     - MONGO_INITDB_ROOT_PASSWORD=password
+      # Set the root username for MongoDB
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      # Set the root password for MongoDB
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    # Mount a named volume to persist MongoDB data
     volumes:
-     - mongo-data:/data/db
+      - mongo-data:/data/db
+
+  # Define the service for Mongo Express (a web-based MongoDB admin interface)
   mongo-express:
+    # Use the official Mongo Express image from Docker Hub
     image: mongo-express
+    # Always restart the container if it stops
     restart: always
+    # Map port 8080 on the host to port 8081 in the container
     ports:
-     - 8080:8081
+      - 8080:8081
+    # Set environment variables for Mongo Express
     environment:
-     - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-     - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-     - ME_CONFIG_MONGODB_SERVER=mongodb
+      # Set the admin username for MongoDB
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      # Set the admin password for MongoDB
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      # Specify the MongoDB server to connect to
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    # Ensure that Mongo Express service starts only after the MongoDB service is up
     depends_on:
-     - "mongodb"
+      - "mongodb"
+
+# Define named volumes for the services
 volumes:
+  # Define a named volume for persisting MongoDB data
   mongo-data:
+    # Use the local driver for the volume
     driver: local
