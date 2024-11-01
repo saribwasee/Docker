@@ -1,5 +1,7 @@
 
 
+
+
 # Docker
 
 A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries, and settings. LXC is an old version of the container concept; the new and extended version is Docker, which creates a virtual environment.
